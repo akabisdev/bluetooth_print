@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:permission_handler/permission_handler.dart';
+
 import 'package:flutter_print_demo/models/print_item.dart';
 import 'package:flutter_print_demo/screens/print_page.dart';
 
@@ -17,6 +19,24 @@ class _HomePageState extends State<HomePage> {
   ];
 
   int _selectedItemIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    requestAccess();
+  }
+
+  Future<void> requestAccess() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.storage,
+      Permission.bluetooth,
+      Permission.bluetoothScan,
+      Permission.bluetoothAdvertise,
+      Permission.bluetoothConnect,
+    ].request();
+    // _storagePermissionGranted = await Permission.storage.request().isGranted;
+    // _blePermissionGranted = await requestBLEAccess();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +67,12 @@ class _HomePageState extends State<HomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PrintPage(
-                printItem: _printItems[_selectedItemIndex],
-              ),
+              builder: (context) {
+                // return PtChainPrintBluetoothPrintPage(title: 'Print');
+                return PrintPage(
+                  printItem: _printItems[_selectedItemIndex],
+                );
+              },
             ),
           );
         },

@@ -36,7 +36,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   bluetooth_print: ^4.3.0
-  brother_printer: ^0.1.5
+  another_brother: ^0.0.30
+  permission_handler: ^10.2.0
+  widgets_to_image: ^0.0.2
 
 dev_dependencies:
   flutter_test:
